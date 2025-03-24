@@ -1,0 +1,166 @@
+openapi: 3.1.0
+info:
+  title: Booksim Runner
+  description: Run NoC simulations using Booksim via natural language.
+  version: 1.0.0
+paths:
+  /openapi.yaml:
+    get:
+      summary: Serve Openapi Yaml
+      operationId: serve_openapi_yaml_openapi_yaml_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /logo.png:
+    get:
+      summary: Get Logo
+      operationId: get_logo_logo_png_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /legal:
+    get:
+      summary: Get Legal
+      operationId: get_legal_legal_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /select-config:
+    post:
+      summary: Select Config
+      operationId: select_config_select_config_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /customize-config:
+    post:
+      summary: Customize Config Endpoint
+      operationId: customize_config_endpoint_customize_config_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomizationRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /simulate:
+    post:
+      summary: Simulate
+      operationId: simulate_simulate_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulationRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ConfigRequest:
+      properties:
+        prompt:
+          type: string
+          title: Prompt
+      type: object
+      required:
+      - prompt
+      title: ConfigRequest
+    CustomizationRequest:
+      properties:
+        config_path:
+          type: string
+          title: Config Path
+        updates:
+          type: object
+          title: Updates
+      type: object
+      required:
+      - config_path
+      - updates
+      title: CustomizationRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SimulationRequest:
+      properties:
+        config_path:
+          type: string
+          title: Config Path
+      type: object
+      required:
+      - config_path
+      title: SimulationRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
