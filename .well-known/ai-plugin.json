@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Booksim Runner",
+  "name_for_model": "booksimRunner",
+  "description_for_human": "Run NoC simulations using Booksim via natural language.",
+  "description_for_model": "Use this plugin to select Booksim configs, customize them, run simulations, and return performance summaries.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "http://localhost:8000/openapi.yaml"
+  },
+  "logo_url": "https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/chip.svg",
+  "contact_email": "your@email.com",
+  "legal_info_url": "http://localhost:8000/legal"
+}
+
